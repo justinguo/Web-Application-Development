@@ -1,0 +1,28 @@
+{% extends "socialnetwork/base.html" %} {% block title %} Home - Followers {% endblock %} {% block css %} {% load staticfiles %}
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/header-bar-style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/home.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/post.css' %}" type="text/css">
+{% endblock %} {% block base %}
+<div class="dashboard">
+    <div class="container">
+        <div class="row" style="text-align:center">
+            <form class="topform" action="{% url 'home' %}" method="post">
+                <button class="btn btn-primary btn-lg follow" type="submit" style="margin-right:30px">Global Posts</button>
+                {% csrf_token %}
+            </form>
+            <form class="topform" action="{% url 'home-followers' %}" method="post">
+                <button class="btn btn-danger btn-lg follow" type="submit">Follower's Posts</button>
+                {% csrf_token %}
+            </form>
+        </div>
+        <br> {% if not posts %}
+        <h4 style="text-align:center">  </h4> {% else %}
+        <h3 style="text-align:center"> FOLLOWER'S POST STREAM </h3>
+        <div class="postList">
+            {% for post in posts %} {% include "socialnetwork/post.html" with post=post.0 token=csrf_token path='home-followers' form=form followed=True is_home=False is_owner=False only %} {% endfor %}
+        </div>
+        {% endif %}
+    </div>
+</div>
+{% endblock %}

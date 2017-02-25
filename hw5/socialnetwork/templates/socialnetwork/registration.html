@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> Registration </title>
+    {% load staticfiles %}
+    <link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css">
+    <link rel="stylesheet" href="{% static 'css/registration.css' %}" type="text/css">
+    <style>
+    .errorlist {
+        list-style: none;
+        margin: 0px;
+        margin-left: -35px;
+    }
+    </style>
+</head>
+
+<body>
+    <a href="/socialnetwork/login">
+        {% load staticfiles %}
+        <img src="{% static 'images/logo.png' %}" alt="Logo image" />
+    </a>
+    {% for error in form.non_field_errors %}
+    <div class="alert alert-danger" role="alert">{{error}}</div>
+    {% endfor %}
+    <div class="container">
+        <h3> Start Here To Become A Blogger! </h3>
+        <form role="form" action="{% url 'register' %}" method="post">
+            {% for field in form.visible_fields %}
+            <div class="form-group">
+                {% if field.errors %}
+                <div class="form-group has-error">
+                    <label class="control-label">{{field.errors}}</label>
+                    {{field}}
+                </div>
+                {% else %} {{field.label_tag}} {{field}} {% endif %}
+            </div>
+            {% endfor %}
+            <button type="submit" value="Register" class="btn btn-default">Register</button>
+            {% csrf_token %}
+        </form>
+    </div>
+</body>
+
+</html>

@@ -1,0 +1,21 @@
+body {
+	background-image: url('/static/images/background.jpg');
+}
+
+p {
+	color: black;
+	text-align: center;
+	font-size: 20px;
+	font-weight: bold;
+	margin: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%)
+}
+
+img {
+	display: block;
+	margin: auto;
+}

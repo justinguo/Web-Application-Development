@@ -1,0 +1,13 @@
+img {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.has-error .control-label {
+	color: #801515;
+}
+
+body {
+	background-color: #F0F8FF;
+}

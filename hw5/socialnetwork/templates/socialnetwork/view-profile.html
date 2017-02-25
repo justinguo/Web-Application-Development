@@ -1,0 +1,70 @@
+{% extends "socialnetwork/base.html" %} {% block title %} View Profile {% endblock %} {% block css %} {% load staticfiles %}
+<link rel="stylesheet" href="{% static 'bootstrap/css/bootstrap.min.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/header-bar-style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/view-profile-style.css' %}" type="text/css">
+<link rel="stylesheet" href="{% static 'css/post.css' %}" type="text/css">
+{% endblock %} {% block base %}
+<div class="profile-panel">
+    <div class="container">
+        <div class="col-md-3 sidebar" style="text-align:center">
+            <ul class="nav nav-sidebar">
+                <li>
+                    <div class="thumbnail" style="text-align:center">
+                        {% if profile.img %}
+                        <img class="img-thumbnail profile" src="{{profile.img.url}}" alt="" width="160" height="160"> {% else %}
+                        <img class="img-thumbnail profile" src="user_default.png" alt="" width="160" height="160"> {% endif %}
+                        <div class="caption">
+                            {% if profile %}
+                            <h3>{{profile.user.username}}</h3> {% elif owner_profile %}
+                            <h3>{{owner_profile.user.username}}</h3> {% endif %} {% if profile.self_description %}
+                            <p>{{profile.self_description}}</p>
+                            {% elif owner_profile.self_description %}
+                            <p>{{owner_profile.self_description}}</p>
+                            {% endif %}
+                        </div>
+                        <ul class="list-group">
+                            {% if profile.email %}
+                            <li class="list-group-item disabled">Email</li>
+                            <li class="list-group-item">{{profile.email}}</li>
+                            {% elif owner_profile.email %}
+                            <li class="list-group-item disabled">Email</li>
+                            <li class="list-group-item">{{owner_profile.email}}</li>
+                            {% endif %}
+                        </ul>
+                        <!-- Edit Profile -->
+                        {% if is_owner %}
+                        <a href="{% url 'edit-profile' %}" class="btn btn-success edit" type="button">Edit Profile</a>
+                        {% endif %}
+                        <br> {% if not is_owner %} {% if is_following %}
+                        <!-- User is following -->
+                        <form method="post" action="{% url 'unfollow' profile.user.username %}">
+                            <button class="btn btn-default btn-lg follow" type="submit">
+                                <span class="glyphicon glyphicon-minus">Unfollow</span>
+                            </button>
+                            <input name="csrfmiddlewaretoken" type="hidden" value="{{token}}"> {% csrf_token %}
+                        </form>
+                        {% endif %} {% endif %}
+                        {% if not is_owner %} {% if not is_following %}
+                        <!-- User is not following -->
+                        <form method="post" action="{% url 'follow' profile.user.username %}">
+                            <button class="btn btn-default btn-lg follow" type="submit">
+                                <span class="glyphicon glyphicon-plus">Follow</span>
+                            </button>
+                            <input name="csrfmiddlewaretoken" type="hidden" value="{{token}}"> {% csrf_token %}
+                        </form>
+                        {% endif %} {% endif %}
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col-md-9 usr-dashboard">
+            <h3 style="text-align:center">{{ profile.username }}Profile Information</h3>
+            <br>
+            <p class="lead socialnetwork-description">Last Name: {{ user.last_name }}</p>
+            <p class="lead socialnetwork-description">First Name: {{ user.first_name }}</p>
+            <p class="lead socialnetwork-description">Age: {{ profile.age }}</p>
+            <p class="lead socialnetwork-description">Bios: {{ profile.self_description }}</p>
+        </div>
+    </div>
+</div>
+{% endblock %}

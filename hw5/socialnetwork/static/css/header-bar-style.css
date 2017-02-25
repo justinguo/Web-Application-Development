@@ -1,0 +1,37 @@
+.navbar.navbar-default {
+	color: #696969;
+	background-color: #696969;
+	border: transparent;
+}
+
+.navbar {
+	vertical-align: middle;
+}
+
+.nav.navbar-nav.navbar-right {
+	padding: 10px;
+}
+
+.navbar-header {
+	height: 70px;
+}
+
+.grumblr-brand {
+	margin-top: -15px;
+	position: absolute;
+}
+
+.navbar-header button {
+	height: 47px;
+}
+
+.btn.btn-danger.dropdown-toggle {
+	height: 44px;
+}
+
+a, a:hover, a:active, a:link {
+	color: #eee;
+	text-decoration: none;
+}
+
+

@@ -1,0 +1,122 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block title %} Edit Profile {% endblock %}
+
+{% block css %}
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/css/edit-profile-style.css" rel="stylesheet">
+<link href="/static/css/header-bar-style.css" rel="stylesheet">
+{% endblock %}
+
+{% block base %}
+{% for error in form.non_field_errors %}
+  <div class="alert alert-danger" role="alert" style="text-align:center">{{error}}</div>
+{% endfor %}
+
+<!-- Viewing User Profile -->
+<div class="container view-user-panel">
+  <!-- Profile Picture -->
+  <div class="row"> 
+    <button class="btn btn-default btn-lg" style="display: block; margin-left: auto; margin-right: auto"><a href="{% url 'view-profile-user' profile.user.username %}" style="color:black;font-size:30px;"><strong>{{profile.user.username}}</strong></a></button>
+    <br>
+    <div class="col-md-2"> 
+    {% if profile.img %}
+      <img class="img-thumbnail profile" src="{{profile.img.url}}" alt="User" width="160" height="160">
+    {% else %}
+      <img class="img-thumbnail profile" src="/user_pics/user_default.png" alt="" width="160" height="160">
+    {% endif %}
+    </div>
+    
+    <form enctype="multipart/form-data" method="post" action="{% url 'edit-profile-img' %}">
+      <div class="col-md-4 form-group input-img">
+        <label for="inputFile">{{form.img.label_tag}}</label>
+        {{form.img}}
+        <button name="upload-image" style="margin-top:10px" type="submit" class="btn btn-default">Upload</button>
+      </div>
+      {% csrf_token %}
+    </form>
+  </div>
+
+  <div class="separator"></div>
+
+  <!-- Change Password -->  
+  <div class="row">   
+    <div class="col-md-5"> 
+      <h4>Update Your Password</h4>
+      <form class="form-horizontal password" role="form" action="{% url 'edit-profile-pw' %}" method="post">
+        <div class="form-group">
+          <label for="inputPassword1" class="col-md-2 control-label">{{form.password.label_tag}}</label>
+          <div class="col-md-8">
+            {{form.password}}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword2" class="col-md-2 control-label">{{form.password1.label_tag}}</label>
+          <div class="col-md-8">
+            {{form.password1}}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="inputPassword3" class="col-md-2 control-label">{{form.password2.label_tag}}</label>
+          <div class="col-md-8">
+            {{form.password2}}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button name="upload-pw" type="submit" class="btn btn-default">Save</button>
+          </div>
+        </div>
+        {% csrf_token %}
+      </form>
+    </div>
+  </div>
+
+  <div class="separator"></div>
+
+  <!-- Change Personal Info -->
+  <div class="row">
+    <div class="col-md-5"> 
+      <h4>Update Your Personal Info</h4>
+      <form class="form-horizontal pinfo" role="form" action="{% url 'edit-profile-info' %}" method="post">
+        <div class="form-group">
+          <label for="first_name" class="col-sm-2 control-label">{{form.first_name.label_tag}}</label>
+          <div class="col-md-6">
+            {{form.first_name}}
+          </div>
+        </div>  
+        <div class="form-group">
+          <label for="last_name" class="col-sm-2 control-label">{{form.last_name.label_tag}}</label>
+          <div class="col-md-6">
+            {{form.last_name}}
+          </div>
+        </div>  
+        <div class="form-group">
+          <label for="age" class="col-sm-2 control-label">{{form.age.label_tag}}</label>
+          <div class="col-sm-3">
+            {{form.age}}
+          </div>
+        </div>
+        <div class="form-group">
+          <label for="birthday" class="col-sm-2 control-label">{{form.birthday.label_tag}}</label>
+          <div class="col-md-6">
+            {{form.birthday}}
+          </div>
+        </div>          
+        <div class="form-group">
+          <label for="description" class="col-sm-2 control-label">{{form.self_description.label_tag}}</label>
+          <div class="col-md-6">
+           {{form.self_description}}
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-sm-offset-2 col-sm-10">
+            <button name="upload-info" type="submit" class="btn btn-default">Save</button>
+          </div>
+        </div>
+        {% csrf_token %}
+      </form>
+    </div>
+  </div>
+</div>
+{% endblock %}

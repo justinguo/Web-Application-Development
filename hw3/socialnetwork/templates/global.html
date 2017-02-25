@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %} title {% endblock %}</title>
+  <link rel="stylesheet" href="/static/bootstrap.css">
+  <link rel="stylesheet" href="/static/bootstrap-theme.css">
+  <link rel="stylesheet" href="/static/socialnetwork.css">
+</head>
+
+<body>
+  <div class="socialnetwork-masthead">
+    <div class="container">
+      {% if request.user.is_authenticated %}
+      <nav class="socialnetwork-nav">
+        <a class="socialnetwork-nav-item active" href="{% url 'home' %}">Home</a>
+        <a class="socialnetwork-nav-item active" href="{% url 'profile' user.id %}">{{ user.username }}'s Profile</a>
+        <a class="socialnetwork-nav-item active" href="{% url 'logout' %}">Logout</a>
+      </nav>
+      {% else %}
+      <nav class="socialnetwork-nav">
+        <a class="socialnetwork-nav-item active" href="{% url 'home' %}">Home</a>
+      </nav>
+      {% endif %}
+    </div>
+  </div>
+{% block errors %}
+    {% for error in errors %}
+        <p class="err-msg">
+            {{error}}
+        </p>
+    {% endfor %}
+{% endblock %}
+
+{% block content %}
+
+{% endblock %}
+
+</body>
+</html>

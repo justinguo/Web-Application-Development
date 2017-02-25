@@ -1,0 +1,104 @@
+﻿@font-face {
+    font-family: Arial;
+    font-style: normal;
+    font-weight: 400;
+}
+
+body
+{
+    font-family: Arial;
+    font-size: 1.0em;
+}
+
+.calculator {
+    display: inline-block;
+    text-align: left;
+    border: 2px solid black;
+    padding: 16px;
+    border-radius: 5px;
+}
+
+.display {
+    display: inline-block;
+    width: 335px;
+    text-align: right;
+    border: 1px solid black;
+    color: black;
+    font-family: Arial;
+    font-size: 2.0em;
+    padding: 0px 4px 1px 4px;
+    border-radius: 2px;
+    margin: 0 0 12px 0;
+}
+
+.row {
+    margin: 8px 0 0 0;
+}
+
+.button {
+    display: inline-block;
+    vertical-align: middle;
+    width: 80px;
+    height: 50px;
+    border: 1px solid black;
+    color: black;
+    font-family: Arial;
+    border-radius: 8px;
+    padding: 0px 4px 1px 4px;
+    border-radius: 8px;
+    margin: 0 4px 0 0;
+}
+
+.button-number {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+    width: 80px;
+    font-size: 1.4em;
+}
+
+.button-operator {
+    display: inline-block;
+    text-align: center;
+    vertical-align: middle;
+    line-height: 50px;
+    width: 80px;
+    font-size: 1.8em;
+    font-weight: bold;
+}
+
+.button:hover {
+    background: #FFCCCC;
+}
+
+.button-invisible {
+    visibility: hidden;
+}
+
+.yellow {
+    background-color: #FFEBCD;
+}
+
+.green {
+    background-color: #F0FFF0;
+}
+
+.largeshadow {
+    box-shadow: 3px 3px 4px #000;
+}
+
+.smallshadow {
+    box-shadow: 3px 3px 3px #666666;
+}
+
+.invisible {
+    opacity: 0.0;
+    box-shadow: 3px 3px 3px #666666;
+}
+
+.blackgradient {
+    background: linear-gradient(to bottom,  rgba(149,149,149,1) 0%,rgba(13,13,13,1) 46%,rgba(1,1,1,1) 50%,rgba(10,10,10,1) 53%,rgba(78,78,78,1) 76%,rgba(56,56,56,1) 87%,rgba(27,27,27,1) 100%);
+}
+
+

@@ -1,0 +1,65 @@
+{% extends "socialnetwork/base.html" %}
+
+{% block title %} Home {% endblock %}
+
+{% block css %}
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/css/home.css" rel="stylesheet">
+<link href="/static/css/post.css" rel="stylesheet">
+<link href="/static/css/header-bar-style.css" rel="stylesheet">
+{% endblock %}
+
+{% block base %}
+<div class="dashboard">
+  <div class="container">
+      {% if not posts %}
+
+          <div class="col-md-12" style="text-align:center">
+            <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#getStartedModal" style="width:300px; height:50px">
+              Welcome To Blog!
+            </button>
+          </div>
+
+          <div class="modal fade" id="getStartedModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                  <h3 class="modal-title" id="myModalLabel">Welcome to Blog!</h3>
+                </div>
+                <div class="modal-body" style="text-align:center">
+                  <p style="font-size:150%;">
+                  Publish A New Post! 
+                  </p>
+                  <br>
+                  <button class="btn btn-primary btn-lg" type="button" title="Publish Post">
+                    <a href="{% url 'makepost-page' %}"><b>+ </b></font>Publish Post</a>
+                  </button>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+              </div>
+            </div>
+          </div> 
+      {% else %} 
+
+        <div class="row" style="text-align:center">
+          <form class="topform" action="{% url 'home' %}" method="post">
+            <button class="btn btn-primary btn-lg follow" type="submit" style="margin-right:30px">Global Posts</button>
+            {% csrf_token %}
+          </form>
+          <form class="topform" action="{% url 'home-followers' %}" method="post">
+            <button class="btn btn-warning btn-lg follow" type="submit">Follower's Posts</button>
+            {% csrf_token %}
+          </form>
+        </div>
+        <h3 style="text-align:center"> GLOBAL POSTS STREAM </h3>
+        {% for post in posts %}
+          {% include "socialnetwork/post.html" with post=post token=csrf_token form=form path="home" is_home=True is_owner=True only %}
+        {% endfor %}
+      {% endif %}
+
+  </div>
+</div>
+{% endblock %}

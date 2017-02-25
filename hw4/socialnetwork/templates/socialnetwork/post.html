@@ -1,0 +1,50 @@
+<div class="row posts" id="{{post.id}}">
+
+  <!-- Following/Unfollowing Function -->
+  <div class="col-md-2 left">
+    <a href="{% url 'view-profile-user' post.profile.user.username %}">
+    <img class="user" src="{{post.profile.img.url}}">
+    </a>
+    <button class="btn btn-primary"><a href="{% url 'view-profile-user' post.profile.user.username %}" style="color:#001C55;font-size:20px;"><strong>{{post.profile.user.username}}</strong></a></button>
+    <br>
+      {% if not owner_profile %}
+        {% if followed %} <!-- User is following -->
+          <form method="post" action="{% url 'unfollow' post.profile.user.username %}">
+            <button class="btn btn-default btn-lg follow" type="submit">
+              <span class="glyphicon glyphicon-minus">Unfollow</span>
+            </button>
+            <input name="csrfmiddlewaretoken" type="hidden" value="{{token}}">
+          </form>
+        {% else %} <!-- User is not following -->
+         <form method="post" action="{% url 'follow' post.profile.user.username %}">
+            <button class="btn btn-default btn-lg follow" type="submit">
+              <span class="glyphicon glyphicon-plus">Follow</span>
+            </button>
+            <input name="csrfmiddlewaretoken" type="hidden" value="{{token}}">
+          </form>
+        {% endif %}
+      {% endif %}
+  </div>
+
+  <!-- List Of Posts -->
+  <div class="col-md-8 main">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h3 class="panel-title">{{post.title}}</h3>
+      </div>
+      <div class="panel-body">
+        {{post.textpost}}
+        <br>
+        {% if post.image %}
+          <img style="display:block;margin:10px auto;max-width:500px;max-height:700px" src="{{post.image.url}}" class="thumbnail">
+        {% endif %}
+        <br>
+        {{post.posted_at}}
+      </div>
+    </div>
+  </div>
+
+  <!-- Sidebar -->
+  <div class="col-md-2 right">
+  </div>
+</div>

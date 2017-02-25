@@ -1,0 +1,53 @@
+{% extends "global.html" %}
+
+{% block content %}
+    <section>
+        <div class="container msg-div">
+            <div class="socialnetwork-header">
+                <h2 class="socialnetwork-title">
+                    {{ profile.username }}'s Blogs
+                </h2>
+            </div>
+    </section>
+    </section>
+            <div class="container msg-div">
+                <h2 class="socialnetwork-title">
+                    User Information:
+                </h2>
+                <p class="lead socialnetwork-description">Last Name: {{ profile.last_name }}</p>
+                <p class="lead socialnetwork-description">First Name: {{ profile.first_name }}</p>
+                <p class="lead socialnetwork-description">User ID: {{ profile.username }}</p>
+            </div>
+    </section>
+    <section>
+            {% for post in posts %}
+            <div class="container msg-div">
+                <h3 class="socialnetwork-post-title">
+                    <a href="{% url 'profile' post.author.id %}">{{ post.author.username }}</a>
+                </h3>
+                <p class="socialnetwork-post-meta"> {{ post.post_time }} </p>                
+                <p> {{ post.text }} </p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section>
+        <div class="container msg-div">
+            <div class="socialnetwork-header">
+                <h2 class="socialnetwork-title">Add a new post</h2>
+            </div>
+            <form class="form-group" action="{% url 'add' %}" method="post">
+            {% for field in form %}
+                <p>{{ field.label_tag }}</p>
+                {{ field }}
+                <span class="err-msg">{{ field.errors }}</span>
+            {% endfor %}
+            <button class="btn btn-primary " type="submit" value="Post"/> Post </button>
+            {% csrf_token %}
+            </form>
+        </div>
+    </section>
+{% endblock %}
+
+</body>
+</html>

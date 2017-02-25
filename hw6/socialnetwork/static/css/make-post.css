@@ -1,0 +1,23 @@
+.container {
+	margin: 60px;
+}
+
+.row {
+	padding-bottom: 10px;
+}
+
+form {
+	margin: 20px;
+}
+
+/* post button */
+.post {
+	float: right;
+	margin-bottom: 20px; 
+}
+
+body {
+	background-color: #D9534F;
+	background-image: url('../images/background.jpg');
+	min-width: 510px;
+}

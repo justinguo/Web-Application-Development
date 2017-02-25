@@ -1,0 +1,74 @@
+<div class="row posts" id="{{post.id}}">
+    <!-- Profile View Button -->
+    <div class="col-md-2 left">
+        <a href="{% url 'view-profile-user' post.profile.user.username %}">
+            <img class="user" src="{{post.profile.img.url}}">
+        </a>
+        <button class="btn btn-primary"><a href="{% url 'view-profile-user' post.profile.user.username %}"
+                                           style="color:#001C55;font-size:20px;"><strong>{{post.profile.user.username}}</strong></a>
+        </button>
+    </div>
+    <!-- List Of Posts -->
+    <div class="col-md-8 main">
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{post.title}}</h3>
+            </div>
+            <div class="panel-body">
+                {{post.textpost}}
+                <br> {% if post.image %}
+                <img style="display:block;margin:10px auto;max-width:500px;max-height:700px" src="{{post.image.url}}"
+                     class="thumbnail"> {% endif %}
+                <br> {{post.posted_at}}
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar buttons -->
+    <div class="col-md-2 right">
+        <ul class="nav nav-sidebar">
+            <li>
+                <button class="getComments btn btn-success btn-lg" type="button" post-id="{{post.id}}"
+                        data-toggle="modal" data-target="#{{post.profile.user.username}}{{post.id}}">
+                    <span class="glyphicon glyphicon-pencil">Comment</span>
+                </button>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- User Comment -->
+<div class="modal fade" id="{{post.profile.user.username}}{{post.id}}" tabindex="-1" role="dialog"
+     aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span
+                        class="sr-only">Close</span></button>
+                <h4 class="modal-title" id="myModalLabel">Comment Here</h4>
+            </div>
+            <div class="modal-body">
+                <!-- Comment Box -->
+                <div class="comment-box">
+                    <ul class="commentList commentList{{post.id}}">
+                    </ul>
+
+                    <form id="commentForm{{post.id}}" role="form" method="post">
+                        <div id="goDown{{post.id}}"></div>
+                        <div class="form-group">
+                            {{form.comment}}
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" class="addComment btn btn-default" post-id="{{post.id}}">Add</button>
+                        </div>
+                        <input name="csrfmiddlewaretoken" type="hidden" value="{{token}}">
+                    </form>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,3 @@
+{% for post in posts %}
+	{% include "socialnetwork/post.html" with post=post.0 token=csrf_token path='home-followers' form=form followed=True is_home=False is_owner=False only %}
+{% endfor %}

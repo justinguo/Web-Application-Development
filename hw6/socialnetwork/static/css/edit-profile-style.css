@@ -1,0 +1,27 @@
+div.view-user-panel {
+	padding: 40px;
+	background-color: #F0F8FF;
+	border: 2px dashed #003767;
+	border-radius: 20px 20px 20px 20px;
+}
+
+.separator {
+	margin-top: 35px;
+	margin-bottom: 35px;
+	height: 15px;
+	box-shadow: 0 10px 6px -6px black;
+}
+
+.row {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+body {
+	background-image: url('../images/background.jpg');
+}
+
+ul {
+	list-style-type: none;
+    padding-left: 0px;
+}

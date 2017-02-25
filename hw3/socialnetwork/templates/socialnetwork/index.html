@@ -1,0 +1,43 @@
+{% extends "global.html" %}
+
+{% block content %}
+    <section>
+        <div class="container msg-div">
+            <div class="socialnetwork-header">
+                <h2 class="socialnetwork-title">
+                    Current Blogs
+                </h2>
+                <p class="lead socialnetwork-description">Recent Blogs Posted</p>
+            </div>
+
+            {% for post in posts %}
+            <div class="socialnetwork-post">
+                <h3 class="socialnetwork-post-title">
+                    <a href="{% url 'profile' post.author.id %}">{{ post.author.username }}</a>
+                </h3>
+                <p class="socialnetwork-post-meta"> {{ post.post_time }} </p>                
+                <p> {{ post.text }} </p>
+            </div>
+            {% endfor %}
+        </div>
+    </section>
+    <section>
+        <div class="container msg-div">
+            <div class="socialnetwork-header">
+                <h2 class="socialnetwork-title">Add a new post</h2>
+            </div>
+            <form class="form-group" action="{% url 'add' %}" method="post">
+            {% for field in form %}
+                <p>{{ field.label_tag }}</p>
+                {{ field }}
+                <span class="err-msg">{{ field.errors }}</span>
+            {% endfor %}
+            <button class="btn btn-primary " type="submit" value="Post"/> Post </button>
+            {% csrf_token %}
+            </form>
+        </div>
+    </section>
+{% endblock %}
+
+</body>
+</html>

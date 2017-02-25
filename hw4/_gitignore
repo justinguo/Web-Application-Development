@@ -1,0 +1,12 @@
+# Python compiled files
+*.pyc
+
+# Editor backup files
+*~
+.swp
+
+# SQLite database file
+db.sqlite3
+
+# OS specific files
+.DS_Store

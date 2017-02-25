@@ -1,0 +1,36 @@
+{% extends "socialnetwork/base.html" %}
+	    
+{% block title %} Make A Post {% endblock %}
+
+{% block css %}
+<link href="/static/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/static/css/header-bar-style.css" rel="stylesheet">
+<link href="/static/css/make-post.css" rel="stylesheet">
+{% endblock %}
+
+{% block base %}
+{% for error in form.non_field_errors %}
+  <div class="alert alert-danger" role="alert" style="text-align:center">{{error}}</div>
+{% endfor %}
+<div class="container">
+	<div class="row">
+		<h4 style="text-align:center"> MAKE A POST HERE! </h4>
+		<form enctype="multipart/form-data" role="form" method="post" id="postForm" action="{% url 'make-a-post' %}">
+			<div class="form-group">
+		    	<label for="title">{{form.title.label_tag}}</label>
+		    	{{form.title}}
+		  	</div> 	
+		 	<div class="form-group">
+		    	<label for="description">{{form.textpost.label_tag}}</label>
+		    	{{form.textpost}}
+		  	</div> 		  
+		  	<div class="form-group">
+				<label for="inputFile">{{form.image.label_tag}}</label>
+				{{form.image}}
+			</div>
+			<button class="btn btn-lg btn-primary post" type="submit">Post</button>
+		  	{% csrf_token %}
+		</form>
+	</div>
+</div>
+{% endblock %}

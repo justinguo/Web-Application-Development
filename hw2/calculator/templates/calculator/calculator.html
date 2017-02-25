@@ -1,0 +1,45 @@
+<!DOCTYPE HTML>
+    <html>
+        <head>
+            <title>Calculator</title>
+            <link rel="stylesheet" href="/static/calculator.css">
+        </head>
+        <body>
+            <form action="/calculator/" method="post">
+            <div class="calculator blackgradient largeshadow">
+                <div id="result">
+                    <input id="result" name="result" type="text" class="display green smallshadow" readonly value={{result}}>
+                    <input id="firstArg" name="firstArg" type="hidden" value={{firstArg}}>
+                    <input id="secondArg" name="secondArg" type="hidden" value={{secondArg}}>
+                    <input id="operator" name="operator" type="hidden" value={{operator}}>
+                    <input id="error" name="error" type="hidden" value={{error}}>
+                </div>
+                <div class="row">
+                    <button id="7" name="7" value="7" type="submit" class="button button-number green smallshadow">7</button>
+                    <button id="8" name="8" value="8" type="submit" class="button button-number green smallshadow">8</button>
+                    <button id="9" name="9" value="9" type="submit" class="button button-number green smallshadow">9</button>
+                    <button id="+" name="+" value="+" type="submit" class="button button-operator yellow smallshadow">&plus;</button>
+                </div>
+                <div class="row">
+                    <button id="4" name="4" value="4" type="submit" class="button button-number green smallshadow">4</button>
+                    <button id="5" name="5" value="5" type="submit" class="button button-number green smallshadow">5</button>
+                    <button id="6" name="6" value="6" type="submit" class="button button-number green smallshadow">6</button>
+                    <button id="-" name="-" value="-" type="submit" class="button button-operator yellow smallshadow">&minus;</button>
+                </div>
+                <div class="row">
+                    <button id="1" name="1" value="1" type="submit" class="button button-number green smallshadow">1</button>
+                    <button id="2" name="2" value="2" type="submit" class="button button-number green smallshadow">2</button>
+                    <button id="3" name="3" value="3" type="submit" class="button button-number green smallshadow">3</button>
+                    <button id="*" name="*" value="*" type="submit" class="button button-operator yellow smallshadow">&times;</button>
+                </div>
+                <div class="row">
+                    <button id="0" name="0" value="0" type="submit" class="button button-invisible">0</button>
+                    <button id="0" name="0" value="0" type="submit" class="button button-number green smallshadow">0</button>
+                    <button id="=" name="=" value="=" type="submit" class="button button-operator yellow smallshadow">&equals;</button>
+                    <button id="/" name="/" value="/" type="submit" class="button button-operator yellow smallshadow">&divide;</button>
+                </div>
+            </div>
+            {% csrf_token %}
+            </form>
+        </body>
+    </html>
